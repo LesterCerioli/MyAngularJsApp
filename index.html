@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>My AngularJS App</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/CustomerController.js"></script>
+    <script src="services/CustomerService.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center; /* Aligns vertically center */
+            justify-content: center; /* Aligns horizontally center */
+        }
+        .container {
+            width: auto; /* Adjust width as needed */
+        }
+        .error {
+            color: red;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="CustomerController as ctrl">
+        <form name="registrationForm" ng-submit="ctrl.register(registrationForm)" novalidate>
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" ng-model="ctrl.customer.name" name="name" class="form-control" required>
+                <span class="error" ng-show="registrationForm.name.$dirty && registrationForm.name.$error.required">
+                    Name is required.
+                </span>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" ng-model="ctrl.customer.email" name="email" class="form-control" required>
+                <span class="error" ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">
+                    Email is required.
+                </span>
+                <span class="error" ng-show="registrationForm.email.$dirty && registrationForm.email.$error.email">
+                    Please enter a valid email.
+                </span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" ng-disabled="registrationForm.$invalid">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+    
